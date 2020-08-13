@@ -13,6 +13,43 @@ Build a data model for a Role Playing Game.
 - a character can pick a "profession" like fisher/farmer/cook/alchemyst.
 - a Tool is associated with a profession (e.g.: fishing rod with fisher).
 
+## SQL queries from database we created
+
+- list of all quests a character is working on, but haven't completed
+
+  - SELECT \* FROM characters as c
+    JOIN character_quest as cq
+    ON c.id = cq.character_id
+    JOIN quests as q
+    ON cq.quest_id = q.id
+    WHERE cq.completed_on IS NULL;
+
+- list of all completed quests for a character
+
+  - SELECT \* FROM characters as c
+    JOIN character_quest as cq
+    ON c.id = cq.character_id
+    JOIN quests as q
+    ON cq.quest_id = q.id
+    WHERE cq.completed_on IS NOT NULL;
+
+- list all wizards in the game
+
+  - SELECT \* FROM characters as c
+    JOIN classes as cl
+    ON c.class_id = cl.id
+    WHERE cl.id = 1;
+
+- list all quests completed by wizards
+  - SELECT \* FROM characters as c
+    JOIN character_quests as cq
+    ON c.id = cq.character_id
+    JOIN quests as q
+    ON cq.quest_id = q.id
+    JOIN classes as cl
+    ON cl.id = c.class_id
+    WHERE cl.id = 1 AND cq.completed_on IS NOT NULL
+
 ## Types of relationships of tables
 
 - one to one
@@ -39,7 +76,9 @@ Build a data model for a Role Playing Game.
 - every table must have a primary key
 - work on two or three tables at a time
 - on a one to many --> use a foreign key
-  - foreign key goes on the many table and relates to the one table
+  - foreign key goes on the MANY table and relates to the one table
+- many to many --> add a third table
+  - the third table (aka junction table) can have extra information
 
 ## Requirements
 
