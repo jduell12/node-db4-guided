@@ -13,7 +13,7 @@ Build a data model for a Role Playing Game.
 - a character can pick a "profession" like fisher/farmer/cook/alchemyst.
 - a Tool is associated with a profession (e.g.: fishing rod with fisher).
 
-## SQL queries from database we created
+## SQL queries for database we created
 
 - list of all quests a character is working on, but haven't completed
 
